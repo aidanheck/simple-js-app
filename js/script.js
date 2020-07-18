@@ -11,25 +11,94 @@ function printArrayDetails(list) {
 printArrayDetails(pokemonList);
 }*/
 
-var pokemonList = [
-    {
-        name: 'Chatot',
-        height: 2,
-        types: ['flying', 'normal']
-    },
-    {
-        name: 'Aromatisse',
-        height: 3,
-        types: ['fairy']
-    },
-    {
-        name: 'Scolipede',
-        height: 8,
-        types: ['bug', 'poison']
-    },
-];
 
+/*
+forEach function for Task 1.4
 pokemonList.forEach(function (pokemon) {
-    console.log(pokemon.name + "<p>" + pokemon.types + "<p>" + pokemon.height)
+    // console.log(pokemon.name + "<p>" + pokemon.types + "<p>" + pokemon.height);
+    var size;
+
+    if (pokemon.height < 3) {
+        size = "it's a small pokemon!";
+    }
+    else if (pokemon.height >= 3 && pokemon.height < 5) {
+        size = "it's a medium pokemon!";
+    }
+    else {
+        size = "it's a large pokemon!";
+    };
+
+    var result;
+
+    pokemon.types.forEach(function (typesItem) {
+
+        if (typesItem == "bug") { result = '<span style="color:green;"> '; }
+        else if (typesItem == "fairy") { result = '<span style="color:red;"> '; }
+        else if (typesItem == "flying") { result = '<span style="color:yellow;"> '; }
+        else if (typesItem == "poison") { result = '<span style="color:rgb(106, 42, 106);"> '; }
+        else if (typesItem == "psychic") { result = '<span style="color:orange;"> '; }
+    });
+    document.write(result + "name: " + pokemon.name + " (height: " + pokemon.height + " ft)" + " " + size + "<br>" + "types: " + pokemon.types + "<br>");
 }
 )
+*/
+//IIFE Function
+var pokemonRepository = (function () {
+
+    var pokemonList = [
+        {
+            name: 'Chatot', height: 2, types: ['flying', ' normal']
+        },
+        {
+            name: 'Aromatisse', height: 3, types: ['fairy']
+        },
+        {
+            name: 'Scolipede', height: 8, types: ['bug', ' poison']
+        },];
+
+    function getAll() {
+        return pokemonList;
+    }
+
+    function add(pokemon) {
+        if (
+            typeof pokemon === "object" &&
+            "name" in pokemon &&
+            "height" in pokemon &&
+            "types" in pokemon
+        ) {
+            pokemonList.push(pokemon);
+        }
+    }
+    function getAll() {
+        return pokemonList;
+    }
+    return {
+        add: add,
+        getAll: getAll
+    };
+
+})();
+
+console.log(pokemonRepository.getAll());
+pokemonRepository.add({ name: 'Pikachu', height: 1, types: ['electric'] });
+console.log(pokemonRepository.getAll());
+
+//IIFE forEach function
+
+pokemonRepository.getAll().forEach(function (pokemon) {
+    var size;
+
+    if (pokemon.height < 3) {
+        size = "it's a small pokemon!";
+    }
+    else if (pokemon.height >= 3 && pokemon.height < 5) {
+        size = "it's a medium pokemon!";
+    }
+    else {
+        size = "it's a large pokemon!";
+    };
+}
+)
+
+
