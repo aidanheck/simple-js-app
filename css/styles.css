@@ -1,0 +1,30 @@
+ul {
+    list-style-type: none;
+}
+
+.container {
+    max-width: 50%;
+    margin: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    padding-right: 100px;
+    background-color: rgba(227, 227, 227, 0.55);
+    border: solid #666 1px;
+}
+
+.button-style {
+    border-radius: 5px;
+    border: 1px solid #666;
+    background-color: rgba(214, 214, 214, 1);
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.title {
+    font-size: 1.1em;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    padding-left: 20px;
+}
