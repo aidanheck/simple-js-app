@@ -26,5 +26,6 @@ ul {
     font-size: 1.1em;
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    padding-left: 20px;
+    margin: auto;
+    padding-left: 50px;
 }
