@@ -7,14 +7,7 @@ var pokemonRepository = (function () {
   }
 
   function add(pokemon) {
-    // if (
-    //   typeof pokemon === "object" &&
-    //   "name" in pokemon &&
-    //   "height" in pokemon &&
-    //   "types" in pokemon
-    // ) {
     pokemonList.push(pokemon);
-    // }
   }
 
   function loadList() {
@@ -54,11 +47,11 @@ var pokemonRepository = (function () {
         item.weight = details.weight;
         item.types = [];
         details.types.forEach(function (pokemonType) {
-          item.types.push(pokemonType.type.name);
+          item.types.push(" " + pokemonType.type.name);
         });
         item.abilities = [];
         details.abilities.forEach(function (pokemonAbilities) {
-          item.abilities.push(pokemonAbilities.ability.name);
+          item.abilities.push(" " + pokemonAbilities.ability.name);
         });
       })
       .catch(function (e) {
@@ -67,29 +60,17 @@ var pokemonRepository = (function () {
   }
 
   function addListItem(pokemon) {
-    // var pokemonList = document.querySelector(".pokemon-list");
-    var container = document.querySelector(".container");
-    // var divContainer = document.createElement("div");
-    // divContainer.classList.add("container");
-    // var divTitle = document.createElement("div");
-    // divTitle.classList.add("title");
-    // var header = document.createElement("h1");
-    var unorderedList = document.createElement("ul");
-    unorderedList.classList.add("pokemon-list");
-    var listItem = document.createElement("li");
-    var button = document.createElement("button");
-    button.innerText = pokemon.name;
-    // header.innerText = "Pokédex";
-    button.classList.add("button-style");
-    // container.appendChild(divTitle);
-    // divTitle.appendChild(header);
-    unorderedList.appendChild(listItem);
-    listItem.appendChild(button);
-    container.appendChild(unorderedList);
-    // pokemonList.appendChild(listItem);
-    // document.body.appendChild(unorderedList);
-    document.body.appendChild(container);
-    button.addEventListener("click", function (event) {
+    var container = $(".container");
+    var unorderedList = $('<ul class="pokemon-list"></ul>');
+    var listItem = $("<li></li>");
+    var button = $(
+      '<button class="button-style">' + pokemon.name + "</button>"
+    );
+    unorderedList.append(listItem);
+    listItem.append(button);
+    container.append(unorderedList);
+
+    button.on("click", function (event) {
       showDetails(pokemon);
     });
   }
@@ -101,56 +82,66 @@ var pokemonRepository = (function () {
       showModal(pokemon);
     });
   }
-  var modalContainer = document.querySelector("#modal-container");
+  var modalContainer = $("#modal-container");
   function showModal(pokemon) {
     // clear all existing modal content
     modalContainer.innerHTML = "";
 
-    var modal = document.createElement("div");
-    modal.classList.add("modal");
+    var modal = $('<div class="modal"></div>');
 
     // add the new modal content!
-    var closeButtonElement = document.createElement("button");
-    closeButtonElement.classList.add("modal-close");
-    closeButtonElement.innerText = "close";
-    closeButtonElement.addEventListener("click", hideModal);
+    var closeButtonElement = $(
+      '<button class ="modal-close">' + "close" + "</button>"
+    );
+    closeButtonElement.on("click", hideModal);
 
     //pokemon name element
-    var nameElement = document.createElement("h1");
-    nameElement.innerText = pokemon.name;
+    // var nameElement = document.createElement("h1");
+    // nameElement.innerText = pokemon.name;
+    var nameElement = $("<h1>" + pokemon.name + "</h1>");
     //pokemon image element
-    var imageElement = document.createElement("img");
-    imageElement.classList.add("modal-img");
-    imageElement.setAttribute("src", pokemon.imageUrl);
+    // var imageElement = document.createElement("img");
+    // imageElement.classList.add("modal-img");
+    // imageElement.setAttribute("src", pokemon.imageUrl);
+    var imageElement = $('<img class="modal-image"/>');
+    $(imageElement).attr("src", pokemon.imageUrl);
     //pokemon height element
-    var heightElement = document.createElement("p");
-    heightElement.innerText = "height: " + pokemon.height;
+    // var heightElement = document.createElement("p");
+    // heightElement.innerText = "height: " + pokemon.height;
+    var heightElement = $("<p>" + "height: " + pokemon.height + "</h1>");
     //pokemon weight element
-    var weightElement = document.createElement("p");
-    weightElement.innerText = "weight: " + pokemon.weight + " lbs";
+    // var weightElement = document.createElement("p");
+    // weightElement.innerText = "weight: " + pokemon.weight + " lbs";
+    var weightElement = $(
+      "<p>" + "weight: " + pokemon.weight + " lbs" + "</p>"
+    );
     //pokemon types element
-    var typesElement = document.createElement("p");
-    typesElement.innerText = "types: " + pokemon.types;
+    // var typesElement = document.createElement("p");
+    // typesElement.innerText = "types: " + pokemon.types;
+    var typesElement = $("<p>" + "types: " + pokemon.types + "</p>");
     //pokemon abilities element
-    var abilitiesElement = document.createElement("p");
-    abilitiesElement.innerText = "abilities: " + pokemon.abilities;
+    // var abilitiesElement = document.createElement("p");
+    // abilitiesElement.innerText = "abilities: " + pokemon.abilities;
+    var abilitiesElement = $(
+      "<p>" + "abilities: " + pokemon.abilities + "</p>"
+    );
 
     //add modal content to page
-    modal.appendChild(closeButtonElement);
-    modal.appendChild(nameElement);
-    modal.appendChild(imageElement);
-    modal.appendChild(heightElement);
-    modal.appendChild(weightElement);
-    modal.appendChild(typesElement);
-    modal.appendChild(abilitiesElement);
-    modalContainer.appendChild(modal);
+    modal.append(closeButtonElement);
+    modal.append(nameElement);
+    modal.append(imageElement);
+    modal.append(heightElement);
+    modal.append(weightElement);
+    modal.append(typesElement);
+    modal.append(abilitiesElement);
+    modalContainer.append(modal);
 
     //make the modal content visible
-    modalContainer.classList.add("is-visible");
+    modalContainer.addClass("is-visible");
   }
 
   function hideModal() {
-    modalContainer.classList.remove("is-visible");
+    modalContainer.removeClass("is-visible");
   }
 
   window.addEventListener("keydown", (e) => {
@@ -159,8 +150,8 @@ var pokemonRepository = (function () {
     }
   });
 
-  modalContainer.addEventListener("click", (e) => {
-    // since this is also triggered when clicking inside the modal container, we only want to close if the suer clicks directly on the overlay
+  modalContainer.on("click", (e) => {
+    // since this is also triggered when clicking inside the modal container, we only want to close if the user clicks directly on the overlay
     var target = e.target;
     if (target === modalContainer) {
       hideModal();
@@ -184,31 +175,4 @@ pokemonRepository.loadList().then(function () {
   pokemonRepository.getAll().forEach(function (pokemon) {
     pokemonRepository.addListItem(pokemon);
   });
-
-  //IIFE forEach function
-
-  // pokemonRepository.getAll().forEach(function (pokemon) {
-  //   var size;
-  //   if (pokemon.height < 3) {
-  //     size = "it's a small pokemon!";
-  //   } else if (pokemon.height >= 3 && pokemon.height < 5) {
-  //     size = "it's a medium pokemon!";
-  //   } else {
-  //     size = "it's a large pokemon!";
-  //   }
-
-  //   var result;
-  //   pokemon.types.forEach(function (typesItem) {
-  //     if (typesItem == "bug") {
-  //       result = '<span style="color:green;"> ';
-  //     } else if (typesItem == "fairy") {
-  //       result = '<span style="color:red;"> ';
-  //     } else if (typesItem == "flying") {
-  //       result = '<span style="color:yellow;"> ';
-  //     } else if (typesItem == "poison") {
-  //       result = '<span style="color:rgb(106, 42, 106);"> ';
-  //     } else if (typesItem == "electric") {
-  //       result = '<span style="color:orange;"> ';
-  //     }
-  //   });
 });
