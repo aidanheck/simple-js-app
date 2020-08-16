@@ -12,24 +12,27 @@ var pokemonRepository = (function () {
   function addListItem(pokemon) {
     var pokeButtons = $(".pokemon-list");
     var button = $(
-      '<button type="button" class="btn btn-danger col-12 button-class" data toggle="modal" data-target="#exampleModal">' + pokemon.name + "</button>" + "<div class='col-1'></div>"
+      "<button type= 'button' class='btn btn-danger col-12 button-class' data toggle='modal' data-target='#exampleModal'>" +
+        pokemon.name +
+        "</button>" +
+        "<div class='col-1'></div>"
     );
     var listItem = $("<li></li>");
     listItem.append(button);
     pokeButtons.append(listItem);
-    button.on("click", function () {
+    $(button).on("click", function () {
+      console.log(pokemon);
       showDetails(pokemon);
     });
   }
 
   //Load the details from each pokemon into the modal when called
 
-  function showDetails(item) {
-    loadDetails(item).then(function () {
-      showModal(item);
+  function showDetails(pokemon) {
+    loadDetails(pokemon).then(function () {
+      showModal(pokemon);
     });
   }
-
 
   function loadList() {
     return $.ajax(apiUrl)
@@ -62,17 +65,17 @@ var pokemonRepository = (function () {
         pokemon.abilities = [];
         details.abilities.forEach(function (pokemonAbilities) {
           pokemon.abilities.push(" " + pokemonAbilities.ability.name);
-        })
+        });
       })
       .catch(function (e) {
         console.error(e);
       });
   }
 
-  //this pulls all pokemon data
-  function getAll() {
-    return pokemonList;
-  }
+  // //this pulls all pokemon data
+  // function getAll() {
+  //   return pokemonList;
+  // }
 
   function showModal(pokemon) {
     var modalBody = $(".modal-body");
@@ -80,14 +83,15 @@ var pokemonRepository = (function () {
     modalBody.empty();
     modalTitle.empty();
     var nameElement = $("<h1>" + pokemon.name + "</h1>");
-    var imageElement = $('<img>').attr('src', pokemon.imageUrl);
+    var imageElement = $("<img>").attr("src", pokemon.imageUrl);
     var heightElement = $("<p>" + "height: " + pokemon.height + "</h1>");
     var weightElement = $(
       "<p>" + "weight: " + pokemon.weight + " lbs" + "</p>"
     );
     var typesElement = $("<p>" + "types: " + pokemon.types + "</p>");
     var abilitiesElement = $(
-      "<p>" + "abilities: " + pokemon.abilities + "</p>");
+      "<p>" + "abilities: " + pokemon.abilities + "</p>"
+    );
     //add modal content to page
     modalTitle.append(nameElement);
     modalBody.append(imageElement);
@@ -113,4 +117,3 @@ pokemonRepository.loadList().then(function () {
     pokemonRepository.addListItem(pokemon);
   });
 });
-
