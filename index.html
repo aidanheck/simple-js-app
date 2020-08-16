@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous">
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bitter:wght@300;400&display=swap"
+      rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css" />
     <title>simple js app</title>
     <link rel="icon"
@@ -16,7 +17,6 @@
   </head>
   <body>
     <!--Navigation-->
-    <div class="container-fluid mb-5"></div>
     <nav class="navbar fixed-top navbar-light">
       <a class="navbar-brand" href="#">
         <img src="/imgs/logo.png"
@@ -52,21 +52,19 @@
         </ul>
       </div>
     </nav>
-  </div>
     <!--Modal-->
-    <div class="modal-container">
-      <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="col-4 modal-title"></h5>
-            </div>
-            <div class="modal-body"></div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary"
-                data-dismiss="modal">close</button>
-            </div>
+    <div id="modal-container"></div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!-- <h5 class="col-1 modal-title"></h5> -->
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+              data-dismiss="modal">close</button>
           </div>
         </div>
       </div>
@@ -84,13 +82,11 @@
     <script src="js/promise-polyfill.js"></script>
     <!-- <script src="js/fetch-polyfill.js"></script> -->
     <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
       crossorigin="anonymous"></script>
     <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"></script>
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>
