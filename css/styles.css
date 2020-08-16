@@ -46,32 +46,3 @@ ul {
     font-weight: 400;
     ;
 }
-
-/* .button-style {
-    border-radius: 5px;
-    border: 1px solid #666;
-    background-color: rgba(214, 214, 214, 1);
-    padding: 10px;
-    margin-bottom: 10px;
-    width: 100%;
-}
-
-.modal {
-    margin: auto;
-    display: inline-block;
-    box-sizing: border-box;
-    background: rgba(255, 255, 255, .9);
-    padding: 20px;
-    width: 100%;
-    max-width: 650px;
-    text-align: center;
-}
-
-.modal-close {
-    float: right;
-    -webkit-appearance: none;
-    border: 0;
-    background: none;
-    color: #777;
-    text-decoration: underline;
-} */
