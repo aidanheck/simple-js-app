@@ -12,7 +12,7 @@ var pokemonRepository = (function () {
   function addListItem(pokemon) {
     var pokeButtons = $(".pokemon-list");
     var button = $(
-      "<button type= 'button' class='btn btn-danger col-12 button-class' data toggle='modal' data-target='#exampleModal'>" +
+      "<button type= 'button' class='btn btn-danger col-12 button-class' data-toggle='modal' data-target='#exampleModal'>" +
         pokemon.name +
         "</button>" +
         "<div class='col-1'></div>"
@@ -23,14 +23,6 @@ var pokemonRepository = (function () {
     $(button).on("click", function () {
       console.log(pokemon);
       showDetails(pokemon);
-    });
-  }
-
-  //Load the details from each pokemon into the modal when called
-
-  function showDetails(pokemon) {
-    loadDetails(pokemon).then(function () {
-      showModal(pokemon);
     });
   }
 
@@ -59,24 +51,26 @@ var pokemonRepository = (function () {
         pokemon.height = details.height;
         pokemon.weight = details.weight;
         pokemon.types = [];
-        details.types.forEach(function (pokemonType) {
-          pokemon.types.push(" " + pokemonType.type.name);
-        });
+        for (var i = 0; i < details.types.length; i++) {
+          pokemon.types.push(details.types[i].type.name);
+        }
         pokemon.abilities = [];
-        details.abilities.forEach(function (pokemonAbilities) {
-          pokemon.abilities.push(" " + pokemonAbilities.ability.name);
-        });
+        for (var x = 0; x < details.abilities.length; x++) {
+          pokemon.abilities.push(details.abilities[x].ability.name);
+        }
+        return pokemon;
       })
       .catch(function (e) {
         console.error(e);
       });
   }
+  //Load the details from each pokemon into the modal when called
 
-  // //this pulls all pokemon data
-  // function getAll() {
-  //   return pokemonList;
-  // }
-
+  function showDetails(pokemon) {
+    loadDetails(pokemon).then(function () {
+      showModal(pokemon);
+    });
+  }
   function showModal(pokemon) {
     var modalBody = $(".modal-body");
     var modalTitle = $(".modal-title");
@@ -88,9 +82,9 @@ var pokemonRepository = (function () {
     var weightElement = $(
       "<p>" + "weight: " + pokemon.weight + " lbs" + "</p>"
     );
-    var typesElement = $("<p>" + "types: " + pokemon.types + "</p>");
+    var typesElement = $("<p>" + "types: " + pokemon.types.join(", ") + "</p>");
     var abilitiesElement = $(
-      "<p>" + "abilities: " + pokemon.abilities + "</p>"
+      "<p>" + "abilities: " + pokemon.abilities.join(", ") + "&nbsp;" + "</p>"
     );
     //add modal content to page
     modalTitle.append(nameElement);
